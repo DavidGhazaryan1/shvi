@@ -42,8 +42,8 @@ Deno.test("Tokenizer", async (t) => {
       const result = tokenize("tone 261.63 1000");
 
       assertEquals(result, [atom("tone"), 261.63, 1000]);
-  },
-});
+    },
+  });
 
 
 });
