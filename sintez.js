@@ -13,7 +13,7 @@ function generatePCM(frequency, duration) {
   const SampleRate = 44100
   duration /= 1000;
   let sample = []
-  for(let i = 0; i <= R*duration - 1; i++){
+  for(let i = 0; i <= SampleRate*duration - 1; i++){
     sample[i] = Apmlitude * Math.sin(2 * Math.PI * frequency * (i/SampleRate))
   }
   return sample;
