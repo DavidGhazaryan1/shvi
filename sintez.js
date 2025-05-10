@@ -67,5 +67,18 @@ async function encodeWAV(
 const atom = (name) => Symbol.for(name);
 
 const tokenize = (input) => {
-  throw new Error("Not implemented");
+  if(input == [])
+    return [];
+  const arr_main = input.split(" ")
+  for(let i = 0; i < arr_main.length; i++){
+
+    if(!isNaN(arr_main[i])){
+      arr_main[i] = Number(arr_main[i])
+    }
+    else{
+      arr_main[i] = atom(arr_main[i])
+    }
+
+  }
+  return arr_main;
 };
