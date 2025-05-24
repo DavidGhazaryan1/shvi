@@ -58,8 +58,6 @@ Deno.test("Recursion", async (t) => {
         return loop(str, "");
       };
 
-
-
       const generalResult = reverseCapitalize("BetTeR SafE ThaN SoRry");
       const emptyStringResult = reverseCapitalize("");
       assertEquals(generalResult, "bETtEr sAFe tHAn sOrRY");
@@ -122,29 +120,27 @@ Deno.test("Recursion", async (t) => {
       //  If it is not, add the first character to the result and move to the next character of the string
 
       const strip = (str, substr) => {
-        if(str.length === 0 || substr.length === 0){
-          return str
+        if (str.length === 0 || substr.length === 0) {
+          return str;
         }
 
         const loop = (str, subsubstr, acc) => {
-          if(str.length === 0){
-            return acc
+          if (str.length === 0) {
+            return acc;
           }
 
-          const [first, ...rest] = str
-          const [first1, ...rest1] = subsubstr
-          
-          
-          if(first != first1){
-            acc += first
-            return loop(rest, substr, acc)
+          const [first, ...rest] = str;
+          const [first1, ...rest1] = subsubstr;
+
+          if (first != first1) {
+            acc += first;
+            return loop(rest, substr, acc);
           } else {
-            return loop(rest, rest1, acc)
+            return loop(rest, rest1, acc);
           }
+        };
 
-        }
-
-        return loop(str, substr, "")
+        return loop(str, substr, "");
       };
 
       const generalResult = strip("Skies are grey in Greece", "re");
@@ -165,30 +161,28 @@ Deno.test("Recursion", async (t) => {
       // Move to the next element and repeat the process
 
       const flatten = (arr) => {
-        if(arr.length == 0){
-          return []
+        if (arr.length == 0) {
+          return [];
         }
 
-        const loop = (array, acc, count) => {
-          const [first, ...rest] = array
-          if(count = arr.length){
-            return 0
+        const loop = (array, acc) => {
+          if (array.length == 0) {
+            return acc;
           }
-          count += 1
-          if(!Array.isArray(first)){
-            acc.push(first)
-            return loop(rest, acc, count)
+          const [first, ...rest] = array;
+
+          if (Array.isArray(first)) {
+            acc.push(...flatten(first));
+            return loop(rest, acc);
           } else {
-            return loop(rest, acc, count)
+            acc.push(first);
+            return loop(rest, acc);
           }
+        };
 
-        }
-
-        return loop(arr, [], 0)
+        return loop(arr, []);
       };
 
-      console.log(flatten([1, [2, 3], [4, [5]]]));
-      
       const generalResult = flatten([1, [2, 3], [4, [5]]]);
       const emptyArrayResult = flatten([]);
       assertEquals(generalResult, [1, 2, 3, 4, 5]);
